@@ -39,11 +39,12 @@ namespace ProductReviewManagement
                     ProductReviewManager.CreateDataTable(productReviews);
                     break;
                 case 8:
-                    //DataTable dt = new DataTable();
-                    //ProductReviewManager.AverageOfRating(dt);
-                    //break;
+             
                     ProductReviewManager.ReturnsOnlyIsLikeFieldAsTrue();
                     ProductReviewManager.AverageOfRating();
+                    break;
+                case 9:
+                    ProductReviewManager.ReturnsReviewMessageContainsGood();
                     break;
             }
         }

@@ -179,7 +179,7 @@ namespace ProductReviewManagement
             return count;
         }
         /// <summary>
-        /// Finding the average rating value
+        /// UC9---Finding the average rating value
         /// </summary>
         /// <param name="table"></param>
         /// <returns></returns>
@@ -190,6 +190,19 @@ namespace ProductReviewManagement
             double result = (double)table1.Select().Where(p => p["rating"] != DBNull.Value).Select(c => Convert.ToDecimal(c["rating"])).Average();
             Console.WriteLine(result);
             return result;
+        }
+        public static int ReturnsReviewMessageContainsGood()
+        {
+            List<ProductReview> products = new List<ProductReview>();
+            DataTable table = CreateDataTable(products);
+            int count = 0;
+            var res = from t in table.AsEnumerable() where t.Field<string>("review") =="Good" select t;
+            foreach (var p in res)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
+                count++;
+            }
+            return count;
         }
     }
 }

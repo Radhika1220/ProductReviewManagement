@@ -86,13 +86,22 @@ namespace TestValidation
             int actual = ProductReviewManager.ReturnsOnlyIsLikeFieldAsTrue();
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC10-average rating value 
+        /// </summary>
         [TestMethod]
         public void TestMethodForAverageRating()
         {
             double expected = 12.44;
             double actual = ProductReviewManager.AverageOfRating();
             Assert.AreEqual(expected, actual);
-
+        }
+        [TestMethod]
+        public void TestMethodForReturnsCountOfReviewMessageContainsGood()
+        {
+            int expected = 5;
+            int actual = ProductReviewManager.ReturnsReviewMessageContainsGood();
+            Assert.AreEqual(expected, actual);
         }
     }
 }
