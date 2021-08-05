@@ -96,6 +96,9 @@ namespace TestValidation
             double actual = ProductReviewManager.AverageOfRating();
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC11-->Retrieve Records the list whose review message as "Good"
+        /// </summary>
         [TestMethod]
         public void TestMethodForReturnsCountOfReviewMessageContainsGood()
         {

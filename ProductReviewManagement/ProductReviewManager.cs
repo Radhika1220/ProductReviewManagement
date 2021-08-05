@@ -136,9 +136,9 @@ namespace ProductReviewManagement
         {
             AddingProductReview(products);
             DataTable dt = new DataTable();
-            dt.Columns.Add("productId");
-            dt.Columns.Add("userId");
-            dt.Columns.Add("rating");
+            dt.Columns.Add("productId",typeof(int));
+            dt.Columns.Add("userId",typeof(int));
+            dt.Columns.Add("rating",typeof(string));
             dt.Columns.Add("review");
             dt.Columns.Add("isLike",typeof(bool));
   
@@ -191,6 +191,10 @@ namespace ProductReviewManagement
             Console.WriteLine(result);
             return result;
         }
+        /// <summary>
+        /// UC11-->Retrieve Records the list whose review message as "Good"
+        /// </summary>
+        /// <returns></returns>
         public static int ReturnsReviewMessageContainsGood()
         {
             List<ProductReview> products = new List<ProductReview>();
@@ -203,6 +207,23 @@ namespace ProductReviewManagement
                 count++;
             }
             return count;
+        }
+
+        public static string RetrieveRecordBasedOnRatingAndUserId()
+        {
+            string list = null;
+            List<ProductReview> products = new List<ProductReview>();
+            DataTable table = CreateDataTable(products);
+     
+            Console.WriteLine("\n-------- Retrieve Record based on rating where userid=1 --------");
+            var res = (from product in table.AsEnumerable() where product.Field<Int32>("userId") == 1 orderby product.Field<int>("rating") select product).ToList();
+            foreach (var i in res)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4}\n", i["productId"], i["userId"], i["rating"], i["review"], i["isLike"]);
+                list += i["rating"] + " ";
+            }
+            return list;
+          
         }
     }
 }

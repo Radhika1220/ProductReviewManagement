@@ -46,6 +46,13 @@ namespace ProductReviewManagement
                 case 9:
                     ProductReviewManager.ReturnsReviewMessageContainsGood();
                     break;
+                //case 10:
+                //    ProductReviewManager.RetrieverecordsParticularUserIdAndPrderByRating(1);
+                //    break;
+                case 11:
+                   // DataTable dataTable = new DataTable();
+                    ProductReviewManager.RetrieveRecordBasedOnRatingAndUserId();
+                    break;
             }
         }
     }
