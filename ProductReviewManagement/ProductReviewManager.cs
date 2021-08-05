@@ -94,9 +94,25 @@ namespace ProductReviewManagement
                 Console.WriteLine("ProductId " + ele.ProductId + " " + "Count " + " " + ele.count);
                 Console.WriteLine("-------------");
                 res += ele.ProductId + " " + ele.count + " ";
-                Console.WriteLine(res);
             }
             return res;
+        }
+        /// <summary>
+        /// UC5---->Retrieving the product id in list
+        /// </summary>
+        /// <param name="products"></param>
+        /// <returns></returns>
+        public static string RetrieveOnlyProductIdAndReviews(List<ProductReview> products)
+        {
+            string result = null;
+            AddingProductReview(products);
+            var res = products.Select(product => new { ProductId = product.productId, Review = product.review }).ToList();
+            foreach(var ele in res)
+            {
+                Console.WriteLine("ProductId " + ele.ProductId + " " + "Review " + " " + ele.Review);
+                result += ele.ProductId + " ";     
+            }
+            return result;
         }
     }
 }

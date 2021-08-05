@@ -54,7 +54,16 @@ namespace TestValidation
             string expected = "1 3 2 4 3 4 4 2 9 2 5 3 7 1 10 1 12 1 14 1 18 1 13 1 19 1 ";
             string actual = ProductReviewManager.CountingProductId(productList);
             Assert.AreEqual(expected, actual);
-
+        }
+        /// <summary>
+        /// UC5---->Retrieving the product id in list
+        /// </summary>
+        [TestMethod]
+        public void TestMethodForProductId()
+        {
+            string expected = "1 2 3 2 1 2 4 9 3 5 7 9 10 1 5 3 12 14 18 13 2 4 19 3 5 ";
+            string actual = ProductReviewManager.RetrieveOnlyProductIdAndReviews(productList);
+            Assert.AreEqual(expected, actual);
         }
     }
 }
