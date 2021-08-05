@@ -24,5 +24,16 @@ namespace TestValidation
             int actual = ProductReviewManager.AddingProductReview(productList);
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC2--->Retrieve Top Three Records Whose Rating is High
+        /// </summary>
+        [TestMethod]
+        public void TestMethodForRetrieveTopThreeRecord()
+        {
+            int expected = 3;
+
+            var actual = ProductReviewManager.RetrieveTopThreeRating(productList);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
