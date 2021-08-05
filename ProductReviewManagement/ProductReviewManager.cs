@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Data;
 
 namespace ProductReviewManagement
 {
@@ -39,7 +40,7 @@ namespace ProductReviewManagement
             products.Add(new ProductReview() { productId = 19, userId = 8, review = "Average", rating = 11, isLike = true });
             products.Add(new ProductReview() { productId = 3, userId = 9, review = "Bad", rating = 6, isLike = false });
             products.Add(new ProductReview() { productId = 5, userId = 4, review = "Average", rating = 13, isLike = true });
-            IterateThroughList(products);
+            //IterateThroughList(products);
             return products.Count;
         }
         /// <summary>
@@ -126,6 +127,53 @@ namespace ProductReviewManagement
             var res = (from product in products orderby product.rating descending select product).Skip(5).ToList();
             IterateThroughList(res);
             return res.Count;
+        }
+        /// <summary>
+        /// UC8-->Using DataTable 
+        /// </summary>
+        /// <param name="products"></param>
+        public static int  CreateDataTable(List<ProductReview> products)
+        {
+           AddingProductReview(products);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("productId");
+            dt.Columns.Add("userId");
+            dt.Columns.Add("rating");
+            dt.Columns.Add("review");
+            dt.Columns.Add("isLike",typeof(bool));
+       
+            foreach (var data in products)
+            {
+                dt.Rows.Add(data.productId, data.userId, data.rating, data.review, data.isLike);
+            }
+            //IterateTable(dt);
+            int c= ReturnsOnlyIsLikeFieldAsTrue(dt);
+            return c;
+        }
+        /// <summary>
+        /// Iterate Thorugh Table
+        /// </summary>
+        /// <param name="table"></param>
+        public static void IterateTable(DataTable table)
+        {
+            foreach (DataRow p in table.Rows)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"],p["userId"],p["rating"],p["review"],p["isLike"]);
+            }
+        }
+        public static int ReturnsOnlyIsLikeFieldAsTrue(DataTable table)
+        {
+            //List<ProductReview> products = new List<ProductReview>();
+            //AddingProductReview(products);
+            //CreateDataTable(products);
+            int count = 0;
+            var res = from t in table.AsEnumerable()  where t.Field<bool>("isLike") == true select t;
+            foreach(var p in res)
+            {
+                Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"], p["userId"], p["rating"], p["review"], p["isLike"]);
+                count++;
+            }
+            return count;
         }
     }
 }

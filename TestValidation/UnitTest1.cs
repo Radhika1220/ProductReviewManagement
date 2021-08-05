@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProductReviewManagement;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace TestValidation
@@ -74,6 +75,16 @@ namespace TestValidation
             int expected = 20;
             int actual = ProductReviewManager.SkipTopFiveRecords(productList);
             Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TestMethodForReturnsOnlyIsLikeFieldAsTrue()
+        {
+            int expected = 18;
+           
+            int actual = ProductReviewManager.CreateDataTable(productList);
+            Assert.AreEqual(expected, actual);
+
+
         }
     }
 }
