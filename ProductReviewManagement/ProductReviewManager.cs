@@ -132,23 +132,22 @@ namespace ProductReviewManagement
         /// UC8-->Using DataTable 
         /// </summary>
         /// <param name="products"></param>
-        public static int  CreateDataTable(List<ProductReview> products)
+        public static DataTable  CreateDataTable(List<ProductReview> products)
         {
-           AddingProductReview(products);
+            AddingProductReview(products);
             DataTable dt = new DataTable();
             dt.Columns.Add("productId");
             dt.Columns.Add("userId");
             dt.Columns.Add("rating");
             dt.Columns.Add("review");
             dt.Columns.Add("isLike",typeof(bool));
-       
+  
             foreach (var data in products)
             {
                 dt.Rows.Add(data.productId, data.userId, data.rating, data.review, data.isLike);
             }
             //IterateTable(dt);
-            int c= ReturnsOnlyIsLikeFieldAsTrue(dt);
-            return c;
+            return dt;
         }
         /// <summary>
         /// Iterate Thorugh Table
@@ -161,11 +160,15 @@ namespace ProductReviewManagement
                 Console.WriteLine("{0} | {1} | {2} | {3} | {4} ", p["productId"],p["userId"],p["rating"],p["review"],p["isLike"]);
             }
         }
-        public static int ReturnsOnlyIsLikeFieldAsTrue(DataTable table)
+        /// <summary>
+        /// UC9-retrieve the records whose column islike has true using (DataTable)
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static int ReturnsOnlyIsLikeFieldAsTrue()
         {
-            //List<ProductReview> products = new List<ProductReview>();
-            //AddingProductReview(products);
-            //CreateDataTable(products);
+            List<ProductReview> products = new List<ProductReview>();
+            DataTable table = CreateDataTable(products);
             int count = 0;
             var res = from t in table.AsEnumerable()  where t.Field<bool>("isLike") == true select t;
             foreach(var p in res)
@@ -174,6 +177,19 @@ namespace ProductReviewManagement
                 count++;
             }
             return count;
+        }
+        /// <summary>
+        /// Finding the average rating value
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static double AverageOfRating()
+        {
+            List<ProductReview> products = new List<ProductReview>();
+            DataTable table1 = CreateDataTable(products);
+            double result = (double)table1.Select().Where(p => p["rating"] != DBNull.Value).Select(c => Convert.ToDecimal(c["rating"])).Average();
+            Console.WriteLine(result);
+            return result;
         }
     }
 }
