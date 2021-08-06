@@ -106,5 +106,15 @@ namespace TestValidation
             int actual = ProductReviewManager.ReturnsReviewMessageContainsGood();
             Assert.AreEqual(expected, actual);
         }
+        /// <summary>
+        /// UC12---->Retrieve Record Based On Rating And UserId
+        /// </summary>
+        [TestMethod]
+        public void TestMethodForRetrieveRecordBasedOnRatingAndUserId()
+        {
+            string expected = "14 19 20 ";
+            string actual = ProductReviewManager.RetrieveRecordBasedOnRatingAndUserId();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

@@ -138,8 +138,8 @@ namespace ProductReviewManagement
             DataTable dt = new DataTable();
             dt.Columns.Add("productId",typeof(int));
             dt.Columns.Add("userId",typeof(int));
-            dt.Columns.Add("rating",typeof(string));
-            dt.Columns.Add("review");
+            dt.Columns.Add("rating",typeof(int));
+            dt.Columns.Add("review",typeof(string));
             dt.Columns.Add("isLike",typeof(bool));
   
             foreach (var data in products)
@@ -208,7 +208,10 @@ namespace ProductReviewManagement
             }
             return count;
         }
-
+        /// <summary>
+        /// UC12--->Retrieve Record based on rating where userid=1 
+        /// </summary>
+        /// <returns></returns>
         public static string RetrieveRecordBasedOnRatingAndUserId()
         {
             string list = null;
@@ -222,6 +225,7 @@ namespace ProductReviewManagement
                 Console.WriteLine("{0} | {1} | {2} | {3} | {4}\n", i["productId"], i["userId"], i["rating"], i["review"], i["isLike"]);
                 list += i["rating"] + " ";
             }
+            Console.WriteLine(list);
             return list;
           
         }
